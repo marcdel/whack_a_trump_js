@@ -52,7 +52,8 @@ config :whack_a_trump, WhackATrumpWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg|wav)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/whack_a_trump_web/{live,views}/.*(ex)$",
-      ~r"lib/whack_a_trump_web/templates/.*(eex)$"
+      ~r"lib/whack_a_trump_web/templates/.*(eex)$",
+      ~r{lib/whack_a_trump_web/live/.*(ex)$}
     ]
   ]
 

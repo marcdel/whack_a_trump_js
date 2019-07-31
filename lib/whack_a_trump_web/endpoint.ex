@@ -1,9 +1,9 @@
 defmodule WhackATrumpWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :whack_a_trump
 
-  socket "/socket", WhackATrumpWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  socket "/live", Phoenix.LiveView.Socket
+
+  socket "/socket", WhackATrumpWeb.UserSocket, websocket: true, longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
