@@ -1,5 +1,6 @@
 defmodule WhackATrumpWeb.GameView do
   use Phoenix.LiveView
+  alias WhackATrump.Game
   alias WhackATrumpWeb.LiveView
 
   def render(assigns) do
@@ -7,6 +8,20 @@ defmodule WhackATrumpWeb.GameView do
   end
 
   def mount(_session, socket) do
-    {:ok, assign(socket, test: "Ready!")}
+    if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
+
+    {:ok, assign(socket, game_state: Game.new())}
+  end
+
+  def handle_event("start-game", _, socket) do
+    {:noreply, update(socket, :game_state, fn game_state ->
+      Game.start(game_state)
+    end)}
+  end
+
+  def handle_info(:tick, socket) do
+    {:noreply, update(socket, :game_state, fn game_state ->
+      Game.peep(game_state)
+    end)}
   end
 end

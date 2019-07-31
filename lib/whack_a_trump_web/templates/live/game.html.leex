@@ -1,28 +1,15 @@
-<h1>Whack-a-Trump! <span class="score">0</span></h1>
-<h2>High Score: <span class="highScore score">0</span></h2>
+<h1>Whack-a-Trump! <span class="score"><%= @game_state.current_score %></span></h1>
+<h2>High Score: <span class="highScore score"><%= @game_state.high_score %></span></h2>
 
 <div class="game">
-  <div class="hole hole1">
-    <div class="mole"></div>
-  </div>
-  <div class="hole hole2">
-    <div class="mole"></div>
-  </div>
-  <div class="hole hole3">
-    <div class="mole"></div>
-  </div>
-  <div class="hole hole4">
-    <div class="mole"></div>
-  </div>
-  <div class="hole hole5">
-    <div class="mole"></div>
-  </div>
-  <div class="hole hole6">
-    <div class="mole"></div>
-  </div>
+  <%= for hole <- @game_state.holes do %>
+    <div class="hole <%= if (hole.up), do: "up", else: "" %>">
+      <div class="mole"></div>
+    </div>
+  <% end %>
 </div>
 
-<h1 onClick="startGame()">Start</h1>
+<h1 phx-click="start-game">Start</h1>
 
 <span class="footer">
   <a href="https://twitter.com/marcdel">@marcdel</a>
