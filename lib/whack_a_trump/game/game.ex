@@ -1,5 +1,5 @@
 defmodule WhackATrump.Game do
-  alias WhackATrump.{GameState, Hole}
+  alias WhackATrump.{Game, GameState, Hole}
 
   def new do
     %GameState{}
@@ -7,6 +7,10 @@ defmodule WhackATrump.Game do
 
   def start(game_state) do
     %{game_state | started: true}
+  end
+
+  def stop(game_state) do
+    %{Game.new() | high_score: game_state.high_score}
   end
 
   def peep(%{started: false} = game_state), do: game_state

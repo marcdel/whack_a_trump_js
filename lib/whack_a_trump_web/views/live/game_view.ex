@@ -9,6 +9,7 @@ defmodule WhackATrumpWeb.GameView do
 
   def mount(_session, socket) do
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
+    if connected?(socket), do: :timer.send_interval(10000, self(), :stop_game)
 
     {:ok, assign(socket, game_state: Game.new())}
   end
@@ -29,6 +30,12 @@ defmodule WhackATrumpWeb.GameView do
   def handle_info(:tick, socket) do
     {:noreply, update(socket, :game_state, fn game_state ->
       Game.peep(game_state)
+    end)}
+  end
+
+  def handle_info(:stop_game, socket) do
+    {:noreply, update(socket, :game_state, fn game_state ->
+      Game.stop(game_state)
     end)}
   end
 end

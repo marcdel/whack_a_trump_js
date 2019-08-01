@@ -9,7 +9,11 @@
   <% end %>
 </div>
 
-<h1 phx-click="start-game">Start</h1>
+<%= if @game_state.started do %>
+  <h1>Playing</h1>
+<% else %>
+  <h1 phx-click="start-game">Start</h1>
+<% end %>
 
 <span class="footer">
   <a href="https://twitter.com/marcdel">@marcdel</a>
