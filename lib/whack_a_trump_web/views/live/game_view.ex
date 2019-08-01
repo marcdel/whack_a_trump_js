@@ -19,6 +19,13 @@ defmodule WhackATrumpWeb.GameView do
     end)}
   end
 
+  def handle_event("bonk", index, socket) do
+    {:noreply, update(socket, :game_state, fn game_state ->
+      {bonked_hole_index, _} = Integer.parse(index)
+      Game.bonk(game_state, bonked_hole_index)
+    end)}
+  end
+
   def handle_info(:tick, socket) do
     {:noreply, update(socket, :game_state, fn game_state ->
       Game.peep(game_state)

@@ -19,6 +19,22 @@ defmodule WhackATrump.Game do
     |> update_next_hole(random_index)
   end
 
+  def bonk(%{current_hole_index: index} = game_state, bonked_index) when index != bonked_index do
+    game_state
+  end
+
+  def bonk(game_state, _bonked_index) do
+    new_score = game_state.current_score + 1
+
+    new_high_score = if new_score > game_state.high_score do
+      new_score
+    else
+      game_state.high_score
+    end
+
+    %{game_state | current_score: new_score, high_score: new_high_score}
+  end
+
   defp get_new_index(game_state) do
     max_index = Enum.count(game_state.holes) - 1
     random_index = Enum.random(0..max_index)

@@ -2,9 +2,9 @@
 <h2>High Score: <span class="highScore score"><%= @game_state.high_score %></span></h2>
 
 <div class="game">
-  <%= for hole <- @game_state.holes do %>
+  <%= for {hole, index} <- Enum.with_index(@game_state.holes) do %>
     <div class="hole <%= if (hole.up), do: "up", else: "" %>">
-      <div class="mole"></div>
+      <div phx-click="bonk" phx-value="<%= index %>" class="mole"></div>
     </div>
   <% end %>
 </div>
