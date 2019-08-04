@@ -4,7 +4,7 @@
 <div class="game">
   <%= for {hole, index} <- Enum.with_index(@game_state.holes) do %>
     <div class="hole <%= if (hole.up), do: "up", else: "" %>">
-      <div phx-click="bonk" phx-value="<%= index %>" class="mole"></div>
+      <div onclick="playSound()" phx-click="bonk" phx-value="<%= index %>" class="mole"></div>
     </div>
   <% end %>
 </div>
@@ -18,3 +18,12 @@
 <span class="footer">
   <a href="https://twitter.com/marcdel">@marcdel</a>
 </span>
+
+<script>
+  function playSound() {
+    const audio = document.querySelector('audio')
+    if (!audio) return
+    audio.currentTime = 0
+    audio.play()
+  }
+</script>
