@@ -3,7 +3,7 @@ defmodule WhackATrumpWeb.Endpoint do
 
   socket "/live", Phoenix.LiveView.Socket
 
-  socket "/socket", WhackATrumpWeb.UserSocket, websocket: true, longpoll: false
+  socket "/socket", WhackATrumpWeb.UserSocket, websocket: [timeout: 45_000], longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
